@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventId": "658b58d4-b96b-4fcc-a854-81d5d17cd091",
+  "eventType": "commerce.order-placed",
+  "sourcePlatform": "commerce",
+  "occurredAt": "2026-10-16T06:40:00Z",
+  "correlationId": "commerce-ORD-3098",
+  "subject": {
+    "type": "order",
+    "id": "ORD-3098",
+    "displayName": "Store order"
+  },
+  "status": "pending",
+  "severity": "warning",
+  "data": {
+    "currency": "EUR",
+    "amountMinor": 12900,
+    "itemCount": 2
+  }
+}

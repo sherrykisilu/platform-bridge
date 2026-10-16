@@ -1,0 +1,33 @@
+@PlatformBridge.Api_HostAddress = http://localhost:5254
+
+GET {{PlatformBridge.Api_HostAddress}}/health
+
+###
+
+GET {{PlatformBridge.Api_HostAddress}}/api/dashboard
+Accept: application/json
+
+###
+
+POST {{PlatformBridge.Api_HostAddress}}/api/events
+Content-Type: application/json
+
+{
+  "schemaVersion": "1.0.0",
+  "eventId": "f4fda3c1-bb9a-4f3d-a4aa-aea28408575f",
+  "eventType": "commerce.order-placed",
+  "sourcePlatform": "commerce",
+  "occurredAt": "2026-10-16T07:00:00Z",
+  "correlationId": "commerce-ORD-HTTP-1",
+  "subject": {
+    "type": "order",
+    "id": "ORD-HTTP-1",
+    "displayName": "HTTP sample order"
+  },
+  "status": "pending",
+  "severity": "info",
+  "data": {
+    "currency": "EUR",
+    "amountMinor": 4900
+  }
+}

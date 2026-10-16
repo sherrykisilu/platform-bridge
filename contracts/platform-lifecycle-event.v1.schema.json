@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://platform-bridge.dev/contracts/platform-lifecycle-event.v1.schema.json",
+  "title": "Platform Lifecycle Event",
+  "description": "Version 1 envelope shared by memorial, donation, and commerce platform adapters.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "eventType",
+    "sourcePlatform",
+    "occurredAt",
+    "correlationId",
+    "subject",
+    "status",
+    "severity",
+    "data"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "eventId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "memorial.published",
+        "donation.received",
+        "donation.settled",
+        "commerce.order-placed",
+        "commerce.order-fulfilled",
+        "platform.health-reported"
+      ]
+    },
+    "sourcePlatform": {
+      "type": "string",
+      "enum": [
+        "memorial",
+        "donation",
+        "commerce"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "correlationId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 160
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "failed"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "critical"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "description": "Event-specific, non-sensitive metadata."
+    }
+  }
+}

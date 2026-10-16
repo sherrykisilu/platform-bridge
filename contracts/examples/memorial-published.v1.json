@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventId": "3d236768-669b-46b4-9225-3db7296814f4",
+  "eventType": "memorial.published",
+  "sourcePlatform": "memorial",
+  "occurredAt": "2026-10-16T06:30:00Z",
+  "correlationId": "memorial-MEM-1042",
+  "subject": {
+    "type": "memorial",
+    "id": "MEM-1042",
+    "displayName": "Memorial publication"
+  },
+  "status": "completed",
+  "severity": "info",
+  "data": {
+    "locale": "de-DE",
+    "visibility": "public"
+  }
+}

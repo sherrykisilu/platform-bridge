@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventId": "8bf16af1-0604-4a13-840d-50a7ed26c542",
+  "eventType": "donation.received",
+  "sourcePlatform": "donation",
+  "occurredAt": "2026-10-16T06:35:00Z",
+  "correlationId": "donation-DON-8821",
+  "subject": {
+    "type": "donation",
+    "id": "DON-8821",
+    "displayName": "Donation received"
+  },
+  "status": "processing",
+  "severity": "info",
+  "data": {
+    "currency": "EUR",
+    "amountMinor": 7500
+  }
+}

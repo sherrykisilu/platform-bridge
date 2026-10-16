@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  dotnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet restore PlatformBridge.sln
+      - run: dotnet build PlatformBridge.sln --configuration Release --no-restore
+      - run: dotnet test PlatformBridge.sln --configuration Release --no-build
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src/web/package-lock.json
+      - run: npm ci
+      - run: npm test -- --run
+      - run: npm run build
+
+  commerce-adapter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/commerce-adapter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: services/commerce-adapter/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  donation-adapter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/donation-adapter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - run: mvn --batch-mode verify
+
+  infrastructure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-bicep@v2
+      - run: bicep build infra/main.bicep
+      - run: docker compose config
